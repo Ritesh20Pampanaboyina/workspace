@@ -1,26 +1,30 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Configuration;
 
-namespace AuditApp.DAL
+namespace AuditApp.DataAccess
 {
     public class DataAccessLayer
     {
-        private string connectionString = "your_connection_string_here"; // Define your DB connection string
-        
-        // Method to fetch audit data based on type (Focus/Random)
-        public DataTable GetAuditData(string auditType, DateTime startDate, DateTime endDate)
+        // Connection string from the Web.config file
+        private static string connectionString = ConfigurationManager.ConnectionStrings["AuditDB"].ConnectionString;
+
+        // Method to fetch audit data from the database
+        public static DataTable GetAuditData(string auditType, DateTime startDate, DateTime endDate)
         {
             DataTable auditData = new DataTable();
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
+                // SQL Query to get the audit data
                 string query = "SELECT * FROM AuditTable WHERE AuditType = @AuditType AND Date BETWEEN @StartDate AND @EndDate";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@AuditType", auditType);
                 cmd.Parameters.AddWithValue("@StartDate", startDate);
                 cmd.Parameters.AddWithValue("@EndDate", endDate);
 
+                // Fetch data using SqlDataAdapter
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 adapter.Fill(auditData);
             }
@@ -28,9 +32,8 @@ namespace AuditApp.DAL
             return auditData;
         }
 
-        // Method to insert new audit data (if needed)
-        public void InsertAuditRecord(string
-        specialist, string auditType, DateTime date, string details)
+        // Insert audit record (if needed)
+        public static void InsertAuditRecord(string specialist, string auditType, DateTime date, string details)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -44,26 +47,6 @@ namespace AuditApp.DAL
                 conn.Open();
                 cmd.ExecuteNonQuery();
             }
-        }
-
-        // Method to fetch ADHOC report data
-        public DataTable GetAdhocAuditData(string specialist, DateTime beginDate, DateTime endDate)
-        {
-            DataTable adhocData = new DataTable();
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                string query = "SELECT * FROM AuditTable WHERE Specialist = @Specialist AND Date BETWEEN @BeginDate AND @EndDate";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@Specialist", specialist);
-                cmd.Parameters.AddWithValue("@BeginDate", beginDate);
-                cmd.Parameters.AddWithValue("@EndDate", endDate);
-
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                adapter.Fill(adhocData);
-            }
-
-            return adhocData;
         }
     }
 }
