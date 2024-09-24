@@ -1,0 +1,13 @@
+using System.Data;
+using System.Xml;
+
+public class XMLHelper
+{
+    public static void ConvertToXML(DataTable auditData, string fileName)
+    {
+        using (XmlWriter writer = XmlWriter.Create(fileName))
+        {
+            auditData.WriteXml(writer, XmlWriteMode.WriteSchema);
+        }
+    }
+}
