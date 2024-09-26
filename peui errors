@@ -1,12 +1,21 @@
 Server Error in '/' Application.
-Parser Error
-Description: An error occurred during the parsing of a resource required to service this request. Please review the following specific parse error details and modify your source file appropriately.
+Compilation Error
+Description: An error occurred during the compilation of a resource required to service this request. Please review the following specific error details and modify your source code appropriately.
 
-Parser Error Message: 'Percentage_Enrollment_UI.WebForm_Percentage_Enrollment_UI' is not allowed here because it does not extend class 'System.Web.UI.Page'.
+Compiler Error Message: CS1061: 'webforms_percentage_enrollment_ui_aspx' does not contain a definition for 'btnSubmit_Click' and no accessible extension method 'btnSubmit_Click' accepting a first argument of type 'webforms_percentage_enrollment_ui_aspx' could be found (are you missing a using directive or an assembly reference?)
 
 Source Error:
 
 
-Line 1:  <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Percentage_Enrollment_UI.aspx.cs" Inherits="Percentage_Enrollment_UI.WebForm_Percentage_Enrollment_UI" %>
-Line 2:  
-Line 3:  <!DOCTYPE html>
+Line 73: 
+Line 74:         <div class="submit-btn">
+Line 75:             <asp:Button ID="btnSubmit" runat="server" Text="Submit Audit Request" OnClick="btnSubmit_Click" />
+Line 76:         </div>
+Line 77: 
+
+Source File: C:\Users\RXPAMPAN\Desktop\RT Project\Percentage_Enrollment_UI\Percentage_Enrollment_UI\WebForms\Percentage_Enrollment_UI.aspx    Line: 75
+
+
+Show Detailed Compiler Output:
+
+Show Complete Compilation Source:
