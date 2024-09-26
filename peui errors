@@ -1,0 +1,12 @@
+Server Error in '/' Application.
+Parser Error
+Description: An error occurred during the parsing of a resource required to service this request. Please review the following specific parse error details and modify your source file appropriately.
+
+Parser Error Message: 'Percentage_Enrollment_UI.WebForm_Percentage_Enrollment_UI' is not allowed here because it does not extend class 'System.Web.UI.Page'.
+
+Source Error:
+
+
+Line 1:  <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Percentage_Enrollment_UI.aspx.cs" Inherits="Percentage_Enrollment_UI.WebForm_Percentage_Enrollment_UI" %>
+Line 2:  
+Line 3:  <!DOCTYPE html>
