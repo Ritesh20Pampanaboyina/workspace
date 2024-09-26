@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Percentage_Enrollment_UI.aspx.cs" Inherits="YourNamespace.Percentage_Enrollment_UI" %>
+<%@ Page Language="C#" AutoEventWireup="true" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -31,50 +31,56 @@
 
         <div class="form-group">
             <label for="enrollmentSpecialist">Choose Enrollment Specialist:</label>
-            <asp:DropDownList ID="ddlEnrollmentSpecialist" runat="server">
-                <asp:ListItem Value="ALL">ALL</asp:ListItem>
-                <!-- Dynamically populated with Enrollment Specialists -->
-            </asp:DropDownList>
+            <select id="ddlEnrollmentSpecialist">
+                <option value="ALL">ALL</option>
+            </select>
         </div>
 
         <div class="form-group">
             <label for="dsu">Choose DSU:</label>
-            <asp:DropDownList ID="ddlDSU" runat="server">
-                <asp:ListItem Value="ALL">ALL</asp:ListItem>
-                <!-- Dynamically populated with DSU options -->
-            </asp:DropDownList>
+            <select id="ddlDSU">
+                <option value="ALL">ALL</option>
+            </select>
         </div>
 
         <div class="form-group">
             <label for="groups">Select Groups:</label>
-            <asp:DropDownList ID="ddlGroups" runat="server">
-                <asp:ListItem Value="ALL">ALL</asp:ListItem>
-                <!-- Dynamically populated with Groups -->
-            </asp:DropDownList>
+            <select id="ddlGroups">
+                <option value="ALL">ALL</option>
+            </select>
         </div>
 
         <div class="form-group">
             <label for="numAddsTerms"># of Adds/Terms:</label>
-            <asp:TextBox ID="txtAddsTerms" runat="server" MaxLength="5"></asp:TextBox>
+            <input type="text" id="txtAddsTerms" maxlength="5" />
         </div>
 
         <div class="form-group">
             <label for="percentMemberChanges">% of Member Account Changes:</label>
-            <asp:TextBox ID="txtPercentChanges" runat="server" MaxLength="3"></asp:TextBox>
+            <input type="text" id="txtPercentChanges" maxlength="3" />
         </div>
 
         <div class="form-group">
             <label for="beginDate">Begin Date:</label>
-            <asp:TextBox ID="txtBeginDate" runat="server" TextMode="Date"></asp:TextBox>
+            <input type="date" id="txtBeginDate" />
         </div>
 
         <div class="form-group">
             <label for="endDate">End Date:</label>
-            <asp:TextBox ID="txtEndDate" runat="server" TextMode="Date"></asp:TextBox>
+            <input type="date" id="txtEndDate" />
+        </div>
+
+        <div class="form-group">
+            <label for="auditType">Type of Audit:</label>
+            <select id="ddlAuditType">
+                <option value="FOCUS">FOCUS</option>
+                <option value="RANDOM">RANDOM</option>
+                <option value="ADHOC">ADHOC</option>
+            </select>
         </div>
 
         <div class="submit-btn">
-            <asp:Button ID="btnSubmit" runat="server" Text="Submit Audit Request" OnClick="btnSubmit_Click" />
+            <asp:Button ID="btnSubmit" runat="server" Text="Submit Audit Request" />
         </div>
 
     </form>
