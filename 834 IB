@@ -1,0 +1,90 @@
+Page 1: Introduction
+Purpose: The 834 IB Process is for transferring member enrollment data from the VPHP database to the QNXT system for Managed Long-Term Services & Support (MLTSS) and Medallion 4 (MED4).
+Frequency: The process occurs on the 1st, 7th, 14th, and 19th of each month.
+Important Notes:
+DB maintenance should be paused, and teams must be notified to avoid running other processes (e.g., Mass Adjudication, 835 jobs) that could interfere.
+Server Check: Ensure all servers (DH/EU) are online before starting.
+Page 2: 834 MLTSS Drop
+When MLTSS file is dropped:
+Acknowledge the drop and start monitoring the process.
+Regularly check the progress of data moving to QNXT (every 10-15 minutes) and ensure there are no errors.
+If there’s an issue (e.g., errors in data fetching or process failure), reset BizTalk services or IIS and monitor the BizTalk logs.
+Monitor specific file paths to ensure no orphan files are left behind.
+When the process is 99.99% complete, notify the team that the MLTSS file has been successfully processed.
+Page 3: 834 MED4 Drop
+When MED4 file is dropped:
+The procedure is similar to the MLTSS drop.
+Monitor the data processing and report on its status.
+Resolve any processing issues by restarting services (BizTalk, IIS) and checking logs.
+Once 99.99% of the file is processed, send a notification and clear the batch jobs to resume normal operations.
+This explanation captures the main points of each page in a simple, clear format. Let me know if you need more details on any part!
+
+
+2/2
+
+
+
+
+
+
+You said:
+There are total of 10 pages iwant all pages line to line Explanation 
+ChatGPT said:
+ChatGPT
+Here is a detailed, page-by-page breakdown of the 834 IB Process document based on each page:
+
+Page 1: Introduction
+Scope: The document focuses on the 834 IB (Inbound) process for the VPHP (Virginia Premier Health Plan) client using MLTSS (Managed Long-Term Services & Support) and MED4 (Medallion 4). This process is used to transfer member enrollment data into the QNXT system.
+Process Frequency: The process runs on the 1st, 7th, 14th, and 19th of every month.
+Notification: Before starting the process, DB maintenance needs to be stopped. This requires submitting a ticket in advance and notifying teams. During the process, specific jobs (e.g., Mass Adjudication, 835, 834 OB) should not be run to avoid conflicts.
+DH EU Servers Bounce: You need to ensure that all servers under the DH (Distribution Hub) are online using the Active Batch Console before proceeding. The services should show a green light.
+Page 2: 834 MLTSS Drop
+Once the MLTSS file is dropped:
+Acknowledge receipt of the file and monitor the process.
+Use the process log header to track the process and provide updates every 10-15 minutes.
+If errors occur (e.g., the log is not fetched or there’s an error status), reset services like IIS or BizTalk.
+Use command prompts or the BizTalk server to restart specific services such as Enterprise Single Sign-On and BizTalk Server Applications if necessary.
+Page 3: Orphan Retry Monitoring
+Orphan Retry Files: These files should be monitored in the following directories:
+C:\Program Files\TriZetto\QNXT Connect\OrphanRetry\Windows\Wait\2
+C:\Program Files\TriZetto\QNXT Connect\OrphanRetry\Windows\Wait\3
+C:\Program Files\TriZetto\QNXT Connect\OrphanRetry\Windows\Wait\4
+C:\Program Files\TriZetto\QNXT Connect\OrphanRetry\Windows\Wait\5
+The process is complete when 99.99% of the file is processed, and all queues are clear. Then, you can notify the team and proceed to the next file drop.
+Page 4: 834 MED4 Drop
+The process for MED4 file drops is very similar to the MLTSS drop:
+Monitor the MED4 process for any issues, and update the team with the batch count.
+Resolve errors by restarting services like IIS and BizTalk.
+Once the process is 99.99% complete, notify the team and resume any batch jobs that were halted for the process (e.g., 835 jobs).
+Page 5: BizTalk and SQL Server Maintenance
+BizTalk Maintenance: BizTalk services need to be stopped and restarted to maintain the process flow.
+Enterprise Single Sign-On Service: Stops and restarts to ensure no issues with data processing.
+IISRESET: Needed for QConnect services that support data exchange between the systems.
+SQL Query Reference: The document includes SQL scripts to monitor the status of the 834 file processing.
+Page 6: SQL Queries for Monitoring
+Script 1: Verifies the status of the custom enrollment daily job, ensuring no conflicts during the 834 run.
+Script 2: Finds the process log ID for the file being processed, used to monitor data transfer progress.
+Script 3: Provides information such as process start time, queueing times, batch counts, and processed records per hour.
+Batch Count: The number of member transactions being processed.
+Stage ID Records: Shows how many records are processed and how many are left.
+Page 7: Execution and Blocking Troubleshooting
+Stored Procedure for Blocking Issues: If a process is blocked, this stored procedure will help troubleshoot the issue.
+Blocking Queries: These identify blocked SQL sessions and their cause, allowing system admins to resolve the issue.
+Page 8: DH and EU Monitoring
+Distribution Hub (DH) Monitoring: Ensures that all DH and EU (Execution Units) are responsive before file processing begins.
+Thread Count Check: Confirms that the EUs are processing the expected number of transactions.
+Orphan Retry Monitoring: Ensures that no transactions are stuck or waiting in queues during processing.
+Page 9: Orphan Retry Process
+Wait Folders: Transactions may wait in different retry folders (folders 2, 3, 4, and 5). Each retry lasts between 5 and 30 minutes before the transaction is retried.
+If a transaction cannot be processed after all retries, it is moved to a dead folder and processing is considered complete.
+Page 10: BizTalk Event Viewer and Server Management
+BizTalk Event Viewer: Check the Event Viewer after 15-20 minutes of file drop to ensure no file-level failures.
+Server Checks: Ensure servers like he1tehpqnxtap66 (SIT) and he1tehpqnxtap67 (UAT) are operating properly.
+Use SQL commands (sp_who2 active) to check the current status of the processes and identify any active blocking or performance issues.
+This is a complete, page-by-page explanation of the 834 IB Process document. Let me know if you need further clarifications!
+
+
+
+
+
+
