@@ -1,0 +1,55 @@
+Page 1:
+Title: 834 OB (Outbound) Jobs Monitoring & Member Count Status
+Objective: Overview of monitoring jobs in Active Batch application and gathering member count before and after job runs.
+Applications Used: Active Batch console and SQL.
+Process Overview: Brief explanation of the process before job execution and member count gathering using SQL queries.
+Page 2:
+Part 1 (Continued):
+AB Schedule: A table listing scheduled jobs across different days for entities such as CareCentrix, Nations, ASHN, Dentaquest, Modivcare, and Carenet.
+CareCentrix Query: SQL query for CareCentrix member count.
+Nations Queries: Two queries provided, one for Medicaid and another for Medicare member counts.
+Page 3:
+Part 1 (Continued):
+SQL queries for Carenet and Modivcare member counts.
+Step-by-step query instructions provided for gathering member count for Active Enrollment and Modivcare Future entities.
+Page 4:
+Part 1 (Continued):
+SQL queries for Modivcare Med4 Future and Modivcare MLTSS Future.
+Instructions to input and execute the queries, gather member count, and record them in an Excel spreadsheet for daily reporting.
+Page 5:
+Part 2: Automated Job Monitoring in Active Batch:
+Job Schedules: List of job schedules for various automated processes, including time (e.g., 1 PM, 6 PM) and days (e.g., Monday to Sunday).
+Job examples:
+OHP_QNXT_Daily_834_MEDICARE_EDI_Outbound: Runs daily at 1 PM EST.
+Other jobs (Mergerator, Nations Medicare, etc.) with specific run times.
+Page 6:
+Part 2 (Continued): More jobs are detailed along with their schedules and the necessary notifications that need to be sent upon successful completion.
+Example: OHP_QNXT_007_MEDICARE_834OB_CHIROPRACTIC, which runs at 1 PM on Sundays, with notifications to be sent after job completion.
+Instructions to monitor each job and send notifications to Teams Prod group.
+Page 7:
+Part 3: Post-Job Execution Tasks:
+Instructions on accessing file locations after job completion (e.g., \\corp.ad.sentara.com\capsdfs...).
+List of file names corresponding to each job, such as:
+CareCentrix: File name PROD_OPTIMAHEALTH_CCX_PAC_834.
+Nations Medicare: File name NATIONS_OPT_834_MEDICARE.
+Page 8:
+Part 3 (Continued):
+Detailed process for opening the output files using Notepad++ and using the NM1*IL* command to count the members.
+Instructions on how to enter this data into a spreadsheet for daily reporting.
+Page 9:
+Part 3 (Continued):
+End-of-Day Email: After completing the jobs, the data is summarized and sent in a day-end email.
+Note 1: After each job at specific times (e.g., 8 AM, 11 AM, 1 PM, etc.), task completion emails must be sent.
+Page 10:
+Note 2: If any job fails, escalation to the L2 support team or David's team is necessary.
+Closing Instructions: Final instructions for handling failures and escalating issues to higher-level teams.
+
+
+
+
+
+
+
+
+
+ChatGPT can
