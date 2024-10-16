@@ -1,0 +1,33 @@
+<div class="row">
+                    <div class="col-sm-5">
+                        <label>Program Name:</label><br />
+               <asp:CheckBox ID="CheckBox_All_Programs" runat="server" Text="All Programs" AutoPostBack="true" Checked="True" OnCheckedChanged="CheckBox_All_Programs_CheckedChanged"    />
+                        <asp:Panel ID="pnlprod" runat="server" Style="overflow-x: hidden; overflow-y: scroll; border: 1px #808080 solid; padding-left: 10px; height: 200px; width: 370px;">
+                            <asp:CheckBoxList ID="chkProgramname" runat="server" RepeatLayout="Table" AutoPostBack="true"></asp:CheckBoxList>
+                        </asp:Panel>
+                    </div>
+                    <div class="col-sm-2">
+                        <br />
+                        <asp:DropDownList ID="ddl_Program_IncExc" runat="server" AutoPostBack="true" CssClass="form-control">
+                            <asp:ListItem Value="">Please Select</asp:ListItem>
+                            <asp:ListItem>Include</asp:ListItem>
+                            <asp:ListItem>Exclude</asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                    <div class="col-sm-1">
+                         <br />
+                        <asp:Button ID="BtnAdd_Program" runat="server" CssClass="btn btn-primary btn-md" Text="Add>>" OnClick="BtnAdd_Program_Click"/>
+                    </div>
+                    <div class="col-sm-2">
+                        <b>Include</b><br />
+                        <asp:ListBox ID="ListBox_Program_Inc" runat="server" AutoPostBack="true" Width="175px" Height="210px" SelectionMode="Multiple" ></asp:ListBox>
+                        <br />
+                        <asp:LinkButton ID="LinkButton_Program_Inc" runat="server" CssClass="lnk" Text="Remove" Visible="false" OnClick="LinkButton_Program_Inc_Click" ></asp:LinkButton>
+                    </div>
+                    <div class="col-sm-2">
+                        <b>Exclude</b><br />
+                        <asp:ListBox ID="ListBox_Program_Exc" runat="server" AutoPostBack="true" Width="175px" Height="210px" SelectionMode="Multiple" ></asp:ListBox>
+                        <br />
+                        <asp:LinkButton ID="LinkButton_Program_Exc" runat="server" CssClass="lnk" Text="Remove" Visible="false" OnClick="LinkButton_Program_Exc_Click" ></asp:LinkButton>
+                    </div>
+                </div>
