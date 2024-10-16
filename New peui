@@ -18,11 +18,11 @@
         .form-actions { margin-top: 20px; text-align: right; }
         .multi-select { width: 250px; }
     </style>
-    <script>
-        function selectAllPrograms(selectAllCheckbox) {
-            var selectElement = document.getElementById('<%= ddlProgramIds.ClientID %>');
-            for (var i = 0; i < selectElement.options.length; i++) {
-                selectElement.options[i].selected = selectAllCheckbox.checked;
+    <script type="text/javascript">
+        function selectAllPrograms(source) {
+            const options = document.getElementById('<%= ddlProgramIds.ClientID %>').options;
+            for (let i = 0; i < options.length; i++) {
+                options[i].selected = source.checked;
             }
         }
     </script>
@@ -33,42 +33,61 @@
 
         <div class="form-container">
             <div class="form-group">
-                <label for="auditType">Type of Audit:</label>
+                <label for="ddlAuditType">Audit Type:</label>
                 <select id="ddlAuditType" runat="server">
-                    <option value="FOCUS">FOCUS</option>
-                    <option value="RANDOM">RANDOM</option>
-                    <option value="ADHOC">ADHOC</option>
+                    <option value="Type1">Type 1</option>
+                    <option value="Type2">Type 2</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="enrollmentSpecialist">Choose Enrollment Specialist:</label>
+                <label for="ddlEnrollmentSpecialist">Enrollment Specialist:</label>
                 <select id="ddlEnrollmentSpecialist" runat="server">
-                    <option value="ALL">ALL</option>
+                    <option value="Specialist1">Specialist 1</option>
+                    <option value="Specialist2">Specialist 2</option>
                 </select>
-                <button class="add-btn" type="button">Add>></button>
             </div>
 
             <div class="form-group">
-                <label for="dsu">Choose DSU:</label>
+                <label for="ddlDSU">DSU:</label>
                 <select id="ddlDSU" runat="server">
-                    <option value="ALL">ALL</option>
+                    <option value="DSU1">DSU 1</option>
+                    <option value="DSU2">DSU 2</option>
                 </select>
-                <button class="add-btn" type="button">Add>></button>
             </div>
 
             <div class="form-group">
-                <label for="groups">Select Groups:</label>
+                <label for="ddlGroups">Groups:</label>
                 <select id="ddlGroups" runat="server">
-                    <option value="ALL">ALL</option>
+                    <option value="Group1">Group 1</option>
+                    <option value="Group2">Group 2</option>
                 </select>
-                <button class="add-btn" type="button">Add>></button>
             </div>
 
             <div class="form-group">
-                <label for="programIds">Select Program IDs:</label>
-                <input type="checkbox" id="chkSelectAll" onclick="selectAllPrograms(this)" checked /> Select All
+                <label for="txtAddsTerms">Number of Adds/Terms:</label>
+                <input type="text" id="txtAddsTerms" runat="server" />
+            </div>
+
+            <div class="form-group">
+                <label for="txtPercentChanges">Percentage of Member Changes:</label>
+                <input type="text" id="txtPercentChanges" runat="server" />
+            </div>
+
+            <div class="form-group">
+                <label for="txtBeginDate">Begin Date:</label>
+                <input type="date" id="txtBeginDate" runat="server" />
+            </div>
+
+            <div class="form-group">
+                <label for="txtEndDate">End Date:</label>
+                <input type="date" id="txtEndDate" runat="server" />
+            </div>
+
+            <div class="form-group">
+                <input type="checkbox" id="chkSelectAll" onclick="selectAllPrograms(this)" checked /> Select All Programs
                 <br />
+                <label for="ddlProgramIds">Program IDs:</label>
                 <asp:ListBox ID="ddlProgramIds" runat="server" SelectionMode="Multiple" Rows="10" CssClass="multi-select">
                     <asp:ListItem Value="PGMP0000000004" Selected="True">PGMP0000000004</asp:ListItem>
                     <asp:ListItem Value="PGM0000000348" Selected="True">PGM0000000348</asp:ListItem>
@@ -85,36 +104,14 @@
                 </asp:ListBox>
             </div>
 
-            <div class="form-group">
-                <label for="numAddsTerms"># of Adds/Terms:</label>
-                <input type="text" id="txtAddsTerms" runat="server" maxlength="5" />
-            </div>
-
-            <div class="form-group">
-                <label for="percentMemberChanges">% of Member Account Changes:</label>
-                <input type="text" id="txtPercentChanges" runat="server" maxlength="3" />
-            </div>
-
-            <div class="form-group">
-                <label for="beginDate">Begin Date:</label>
-                <input type="date" id="txtBeginDate" runat="server" />
-            </div>
-
-            <div class="form-group">
-                <label for="endDate">End Date:</label>
-                <input type="date" id="txtEndDate" runat="server" />
-            </div>
-
             <div class="form-actions">
-                <asp:Button ID="btnSubmit" runat="server" Text="Submit Audit Request" CssClass="submit-btn" OnClick="btnSubmit_Click" />
-                <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="reset-btn" OnClick="btnReset_Click" />
+                <input type="button" class="submit-btn" id="btnSubmit" runat="server" value="Submit" OnServerClick="btnSubmit_Click" />
+                <input type="button" class="reset-btn" id="btnReset" runat="server" value="Reset" OnServerClick="btnReset_Click" />
             </div>
 
-            <asp:Label ID="lblMessage" runat="server" ForeColor="Green" Visible="false"></asp:Label>
-
-            <p>**Green Submit button indicates Request not submitted in this 30 min slot**<br>
-               **Please Click Reset Button to reset all the fields**
-            </p>
+            <div>
+                <asp:Label ID="lblMessage" runat="server" Text="" Visible="false"></asp:Label>
+            </div>
         </div>
     </form>
 </body>
