@@ -63,20 +63,22 @@
         /* Custom checkbox style */
         .custom-checkbox {
             display: inline-block;
-            width: 20px;
-            height: 20px;
+            width: 24px; /* Increased size */
+            height: 24px; /* Increased size */
             background-color: #fff; /* Checkbox background */
-            border: 1px solid #007bff; /* Border color for checkbox */
-            border-radius: 3px; /* Rounded corners */
+            border: 2px solid #007bff; /* Border color for checkbox */
+            border-radius: 4px; /* Rounded corners */
             position: relative;
             cursor: pointer;
             margin-right: 10px;
+            vertical-align: middle; /* Align checkbox with label */
         }
         .custom-checkbox input {
             display: none; /* Hide the default checkbox */
         }
         .custom-checkbox input:checked + .checkmark {
             background-color: #007bff; /* Checked color */
+            border: 2px solid #007bff; /* Keep border same on checked */
         }
         .checkmark {
             position: absolute;
@@ -85,6 +87,21 @@
             left: 0;
             top: 0;
             transition: background-color 0.3s;
+        }
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 6px; /* Adjust position for tick */
+            top: 2px; /* Adjust position for tick */
+            width: 6px; /* Size of the tick */
+            height: 12px; /* Size of the tick */
+            border: solid white; /* Tick color */
+            border-width: 0 2px 2px 0; /* Adjust border for tick shape */
+            transform: rotate(45deg); /* Rotate to make tick */
+        }
+        .custom-checkbox input:checked + .checkmark:after {
+            display: block; /* Show tick when checked */
         }
     </style>
     <script type="text/javascript">
