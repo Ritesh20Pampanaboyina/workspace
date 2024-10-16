@@ -1,0 +1,18 @@
+Server Error in '/' Application.
+Parser Error
+Description: An error occurred during the parsing of a resource required to service this request. Please review the following specific parse error details and modify your source file appropriately.
+
+Parser Error Message: Cannot create an object of type 'System.Boolean' from its string representation 'multiple' for the 'Multiple' property.
+
+Source Error:
+
+
+Line 73:                 <input type="checkbox" id="chkSelectAll" onclick="selectAllPrograms(this)" checked /> Select All
+Line 74:                 <br />
+Line 75:                 <select id="ddlProgramIds" runat="server" multiple="multiple" size="10" style="width: 250px;">
+Line 76:                     <option value="PGMP0000000004" selected>PGMP0000000004</option>
+Line 77:                     <option value="PGM0000000348" selected>PGM0000000348</option>
+
+Source File: /Percentage_Enrollment_UI.aspx    Line: 75
+
+Version Information: Microsoft .NET Framework Version:4.0.30319; ASP.NET Version:4.8.9261.0
