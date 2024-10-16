@@ -2,15 +2,15 @@ Server Error in '/' Application.
 Parser Error
 Description: An error occurred during the parsing of a resource required to service this request. Please review the following specific parse error details and modify your source file appropriately.
 
-Parser Error Message: Cannot create an object of type 'System.Boolean' from its string representation 'multiple' for the 'Multiple' property.
+Parser Error Message: The base class includes the field 'lblMessage', but its type (System.Web.UI.WebControls.Label) is not compatible with the type of control (System.Web.UI.HtmlControls.HtmlGenericControl).
 
 Source Error:
 
 
-Line 98:                 <input type="checkbox" id="chkSelectAll" onclick="selectAllPrograms(this)" checked /> Select All
-Line 99:                 <br />
-Line 100:                <select id="ddlProgramIds" runat="server" multiple="multiple" size="10" style="width: 250px;">
-Line 101:                    <option value="PGMP0000000004" selected>PGMP0000000004</option>
-Line 102:                    <option value="PGM0000000348" selected>PGM0000000348</option>
+Line 119:            </div>
+Line 120:
+Line 121:            <label id="lblMessage" runat="server" style="color: Green; display: none;">Audit request submitted successfully!</label>
+Line 122:
+Line 123:            <p>**Green Submit button indicates Request not submitted in this 30 min slot**<br>
 
-Source File: /Percentage_Enrollment_UI.aspx    Line: 100
+Source File: /Percentage_Enrollment_UI.aspx    Line: 121
