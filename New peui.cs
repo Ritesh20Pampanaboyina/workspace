@@ -1,6 +1,8 @@
 using System;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Web.UI;
+using System.Web.UI.WebControls; // Ensure this is included for ListBox
 
 namespace Percentage_Enrollment_UI
 {
@@ -27,7 +29,9 @@ namespace Percentage_Enrollment_UI
             DateTime beginDate = DateTime.TryParse(txtBeginDate.Value, out beginDate) ? beginDate : DateTime.MinValue;
             DateTime endDate = DateTime.TryParse(txtEndDate.Value, out endDate) ? endDate : DateTime.MinValue;
 
-            string selectedProgramIds = string.Join(",", ddlProgramIds.Items.Cast<ListItem>().Where(i => i.Selected).Select(i => i.Value));
+            // Collect selected Program IDs
+            string selectedProgramIds = string.Join(",", ddlProgramIds.Items.Cast<ListItem>()
+                .Where(i => i.Selected).Select(i => i.Value));
 
             SqlParameter[] parameters = new SqlParameter[]
             {
@@ -60,14 +64,13 @@ namespace Percentage_Enrollment_UI
             txtPercentChanges.Value = string.Empty;
             txtBeginDate.Value = string.Empty;
             txtEndDate.Value = string.Empty;
-            lblMessage.Visible = false;
 
-            // Resetting the ListBox selection
             foreach (ListItem item in ddlProgramIds.Items)
             {
                 item.Selected = false;
             }
-            chkSelectAll.Checked = false; // Uncheck Select All
+            chkSelectAll.Checked = true; // Reset select all checkbox
+            lblMessage.Visible = false; // Hide message label
         }
     }
 }
