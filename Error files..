@@ -2,15 +2,15 @@ Server Error in '/' Application.
 Parser Error
 Description: An error occurred during the parsing of a resource required to service this request. Please review the following specific parse error details and modify your source file appropriately.
 
-Parser Error Message: The base class includes the field 'ddlProgramIds', but its type (System.Web.UI.HtmlControls.HtmlSelect) is not compatible with the type of control (System.Web.UI.WebControls.ListBox).
+Parser Error Message: Cannot create an object of type 'System.Boolean' from its string representation 'multiple' for the 'Multiple' property.
 
 Source Error:
 
 
-Line 70:                 <input type="checkbox" id="chkSelectAll" onclick="selectAllPrograms(this)" checked /> Select All
-Line 71:                 <br />
-Line 72:                 <asp:ListBox ID="ddlProgramIds" runat="server" SelectionMode="Multiple" Rows="10" CssClass="multi-select">
-Line 73:                     <asp:ListItem Value="PGMP0000000004" Selected="True">PGMP0000000004</asp:ListItem>
-Line 74:                     <asp:ListItem Value="PGM0000000348" Selected="True">PGM0000000348</asp:ListItem>
+Line 98:                 <input type="checkbox" id="chkSelectAll" onclick="selectAllPrograms(this)" checked /> Select All
+Line 99:                 <br />
+Line 100:                <select id="ddlProgramIds" runat="server" multiple="multiple" size="10" style="width: 250px;">
+Line 101:                    <option value="PGMP0000000004" selected>PGMP0000000004</option>
+Line 102:                    <option value="PGM0000000348" selected>PGM0000000348</option>
 
-Source File: /Percentage_Enrollment_UI.aspx    Line: 72
+Source File: /Percentage_Enrollment_UI.aspx    Line: 100
