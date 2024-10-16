@@ -19,7 +19,7 @@
     </style>
     <script type="text/javascript">
         function selectAllPrograms(selectAll) {
-            var programList = document.getElementById('ddlProgramIds');
+            var programList = document.getElementById('<%= ddlProgramIds.ClientID %>');
             for (var i = 0; i < programList.options.length; i++) {
                 programList.options[i].selected = selectAll.checked;
             }
@@ -96,7 +96,7 @@
             <div class="form-group">
                 <input type="checkbox" id="chkSelectAll" onclick="selectAllPrograms(this)" checked /> Select All
                 <br />
-                <select id="ddlProgramIds" runat="server" multiple="multiple" size="10" style="width: 250px;">
+                <select id="ddlProgramIds" runat="server" multiple size="10" style="width: 250px;">
                     <option value="PGMP0000000004" selected>PGMP0000000004</option>
                     <option value="PGM0000000348" selected>PGM0000000348</option>
                     <option value="PGM0000000349">PGM0000000349</option>
