@@ -117,7 +117,7 @@
                 <button class="reset-btn" type="reset">Reset</button>
             </div>
 
-            <label id="lblMessage" runat="server" style="color: Green; display: none;">Audit request submitted successfully!</label>
+            <asp:Label ID="lblMessage" runat="server" style="color: Green; display: none;">Audit request submitted successfully!</asp:Label>
 
             <p>**Green Submit button indicates Request not submitted in this 30 min slot**<br>
                **Please Click Reset Button to reset all the fields**
