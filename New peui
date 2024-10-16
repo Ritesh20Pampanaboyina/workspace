@@ -16,14 +16,15 @@
         .submit-btn { background-color: #28a745; }
         .reset-btn { background-color: #007bff; }
         .form-actions { margin-top: 20px; text-align: right; }
-        select[multiple] { height: 150px; }
+        .multi-select { padding: 5px; width: 250px; }
     </style>
+
     <script type="text/javascript">
-        // JavaScript function to handle Select All checkbox functionality
+        // JavaScript function to select/deselect all program IDs
         function selectAllPrograms(checkbox) {
-            var programSelect = document.getElementById('<%= ddlProgramIds.ClientID %>');
-            for (var i = 0; i < programSelect.options.length; i++) {
-                programSelect.options[i].selected = checkbox.checked;
+            var listbox = document.getElementById('<%= ddlProgramIds.ClientID %>');
+            for (var i = 0; i < listbox.options.length; i++) {
+                listbox.options[i].selected = checkbox.checked;
             }
         }
     </script>
@@ -33,8 +34,7 @@
         <h2>Percentage Enrollment Audit Adhoc Selection Criteria</h2>
 
         <div class="form-container">
-            <!-- Other form fields -->
-
+            <!-- Other form groups here -->
             <div class="form-group">
                 <label for="auditType">Type of Audit:</label>
                 <select id="ddlAuditType" runat="server">
@@ -45,51 +45,24 @@
             </div>
 
             <div class="form-group">
-                <label for="enrollmentSpecialist">Choose Enrollment Specialist:</label>
-                <select id="ddlEnrollmentSpecialist" runat="server">
-                    <option value="ALL">ALL</option>
-                </select>
-                <button class="add-btn" type="button">Add>></button>
-            </div>
-
-            <div class="form-group">
-                <label for="dsu">Choose DSU:</label>
-                <select id="ddlDSU" runat="server">
-                    <option value="ALL">ALL</option>
-                </select>
-                <button class="add-btn" type="button">Add>></button>
-            </div>
-
-            <div class="form-group">
-                <label for="groups">Select Groups:</label>
-                <select id="ddlGroups" runat="server">
-                    <option value="ALL">ALL</option>
-                </select>
-                <button class="add-btn" type="button">Add>></button>
-            </div>
-
-            <!-- New Section for Program IDs -->
-            <div class="form-group">
                 <label for="programIds">Program IDs:</label>
                 <input type="checkbox" id="chkSelectAll" onclick="selectAllPrograms(this)" checked /> Select All
                 <br />
-                <select id="ddlProgramIds" runat="server" multiple="multiple" size="10" style="width: 250px;">
-                    <option value="PGMP0000000004" selected>PGMP0000000004</option>
-                    <option value="PGM0000000348" selected>PGM0000000348</option>
-                    <option value="PGM0000000349" selected>PGM0000000349</option>
-                    <option value="PGM0000000352" selected>PGM0000000352</option>
-                    <option value="PGM0000000353" selected>PGM0000000353</option>
-                    <option value="PGMP0000000005" selected>PGMP0000000005</option>
-                    <option value="PGMP0000000007" selected>PGMP0000000007</option>
-                    <option value="PGMP0000000008" selected>PGMP0000000008</option>
-                    <option value="PGMP0000000009" selected>PGMP0000000009</option>
-                    <option value="PGMP0000000010" selected>PGMP0000000010</option>
-                    <option value="PGMP0000000019" selected>PGMP0000000019</option>
-                    <option value="PGMP0000000020" selected>PGMP0000000020</option>
-                </select>
+                <asp:ListBox ID="ddlProgramIds" runat="server" SelectionMode="Multiple" Rows="10" CssClass="multi-select" style="width: 250px;">
+                    <asp:ListItem Value="PGMP0000000004" Selected="True">PGMP0000000004</asp:ListItem>
+                    <asp:ListItem Value="PGM0000000348" Selected="True">PGM0000000348</asp:ListItem>
+                    <asp:ListItem Value="PGM0000000349" Selected="True">PGM0000000349</asp:ListItem>
+                    <asp:ListItem Value="PGM0000000352" Selected="True">PGM0000000352</asp:ListItem>
+                    <asp:ListItem Value="PGM0000000353" Selected="True">PGM0000000353</asp:ListItem>
+                    <asp:ListItem Value="PGMP0000000005" Selected="True">PGMP0000000005</asp:ListItem>
+                    <asp:ListItem Value="PGMP0000000007" Selected="True">PGMP0000000007</asp:ListItem>
+                    <asp:ListItem Value="PGMP0000000008" Selected="True">PGMP0000000008</asp:ListItem>
+                    <asp:ListItem Value="PGMP0000000009" Selected="True">PGMP0000000009</asp:ListItem>
+                    <asp:ListItem Value="PGMP0000000010" Selected="True">PGMP0000000010</asp:ListItem>
+                    <asp:ListItem Value="PGMP0000000019" Selected="True">PGMP0000000019</asp:ListItem>
+                    <asp:ListItem Value="PGMP0000000020" Selected="True">PGMP0000000020</asp:ListItem>
+                </asp:ListBox>
             </div>
-
-            <!-- Other form fields -->
 
             <div class="form-group">
                 <label for="numAddsTerms"># of Adds/Terms:</label>
