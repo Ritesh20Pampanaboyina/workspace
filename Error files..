@@ -7,10 +7,10 @@ Parser Error Message: The base class includes the field 'ddlProgramIds', but its
 Source Error:
 
 
-Line 49:                 <input type="checkbox" id="chkSelectAll" onclick="selectAllPrograms(this)" checked /> Select All
-Line 50:                 <br />
-Line 51:                 <asp:ListBox ID="ddlProgramIds" runat="server" SelectionMode="Multiple" Rows="10" CssClass="multi-select" style="width: 250px;">
-Line 52:                     <asp:ListItem Value="PGMP0000000004" Selected="True">PGMP0000000004</asp:ListItem>
-Line 53:                     <asp:ListItem Value="PGM0000000348" Selected="True">PGM0000000348</asp:ListItem>
+Line 70:                 <input type="checkbox" id="chkSelectAll" onclick="selectAllPrograms(this)" checked /> Select All
+Line 71:                 <br />
+Line 72:                 <asp:ListBox ID="ddlProgramIds" runat="server" SelectionMode="Multiple" Rows="10" CssClass="multi-select">
+Line 73:                     <asp:ListItem Value="PGMP0000000004" Selected="True">PGMP0000000004</asp:ListItem>
+Line 74:                     <asp:ListItem Value="PGM0000000348" Selected="True">PGM0000000348</asp:ListItem>
 
-Source File: /Percentage_Enrollment_UI.aspx    Line: 51
+Source File: /Percentage_Enrollment_UI.aspx    Line: 72
