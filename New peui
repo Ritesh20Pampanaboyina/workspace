@@ -5,103 +5,41 @@
 <head runat="server">
     <title>Percentage Enrollment UI</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f4f4f4; /* Light background color */
-        }
-        h2 {
-            background-color: #007bff; /* Header background color */
-            color: white;
-            padding: 10px;
-            text-align: center;
-            font-size: 20px;
-        }
-        .form-container {
-            background-color: white; /* White background for form */
-            border: 1px solid #ccc;
-            padding: 20px;
-            margin-top: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: inline-block;
-            width: 220px;
-        }
-        input[type="text"],
-        input[type="date"],
-        select {
-            padding: 5px;
-            width: 250px;
-            border: 1px solid #ccc; /* Border color */
-            border-radius: 4px; /* Rounded corners */
-        }
-        .add-btn, .submit-btn, .reset-btn {
-            padding: 5px 15px;
-            color: white;
-            border: none;
-            cursor: pointer;
-            margin-left: 10px;
-            border-radius: 4px; /* Rounded corners */
-        }
-        .add-btn {
-            background-color: #28a745; /* Green color for Add button */
-        }
-        .submit-btn {
-            background-color: #007bff; /* Blue color for Submit button */
-        }
-        .reset-btn {
-            background-color: #dc3545; /* Red color for Reset button */
-        }
-        .form-actions {
-            margin-top: 20px;
-            text-align: right;
-        }
-        /* Custom checkbox style */
-        .custom-checkbox {
-            display: inline-block;
-            width: 24px; /* Increased size */
-            height: 24px; /* Increased size */
-            background-color: #fff; /* Checkbox background */
-            border: 2px solid #007bff; /* Border color for checkbox */
-            border-radius: 4px; /* Rounded corners */
-            position: relative;
-            cursor: pointer;
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h2 { background-color: #4CAF50; color: white; padding: 10px; text-align: center; font-size: 20px; }
+        .form-container { border: 1px solid #ccc; padding: 20px; margin-top: 10px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: inline-block; width: 220px; }
+        input[type="text"], input[type="date"], select { padding: 5px; width: 250px; }
+        .add-btn, .submit-btn, .reset-btn { padding: 5px 15px; color: white; border: none; cursor: pointer; margin-left: 10px; }
+        .add-btn { background-color: #4CAF50; }
+        .submit-btn { background-color: #28a745; }
+        .reset-btn { background-color: #007bff; }
+        .form-actions { margin-top: 20px; text-align: right; }
+
+        /* Checkbox styling */
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
             margin-right: 10px;
-            vertical-align: middle; /* Align checkbox with label */
         }
-        .custom-checkbox input {
-            display: none; /* Hide the default checkbox */
+
+        /* Program list styling */
+        #ddlProgramIds {
+            width: 250px;
+            padding: 5px;
         }
-        .custom-checkbox input:checked + .checkmark {
-            background-color: #007bff; /* Checked color */
-            border: 2px solid #007bff; /* Keep border same on checked */
+
+        .form-group select[multiple] {
+            height: auto;
+            width: 250px;
         }
-        .checkmark {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            left: 0;
-            top: 0;
-            transition: background-color 0.3s;
-        }
-        .checkmark:after {
-            content: "";
-            position: absolute;
-            display: none;
-            left: 6px; /* Adjust position for tick */
-            top: 2px; /* Adjust position for tick */
-            width: 6px; /* Size of the tick */
-            height: 12px; /* Size of the tick */
-            border: solid white; /* Tick color */
-            border-width: 0 2px 2px 0; /* Adjust border for tick shape */
-            transform: rotate(45deg); /* Rotate to make tick */
-        }
-        .custom-checkbox input:checked + .checkmark:after {
-            display: block; /* Show tick when checked */
+
+        /* Adjust the container for the 'Select All' checkbox */
+        .form-group label[for="chkSelectAll"] {
+            display: inline-flex;
+            align-items: center;
         }
     </style>
     <script type="text/javascript">
@@ -181,10 +119,7 @@
             </div>
 
             <div class="form-group">
-                <div class="custom-checkbox">
-                    <input type="checkbox" id="chkSelectAll" onclick="selectAllPrograms(this)" checked />
-                    <span class="checkmark"></span>
-                </div>
+                <input type="checkbox" id="chkSelectAll" onclick="selectAllPrograms(this)" checked /> 
                 <label for="chkSelectAll">Select All</label>
                 <br />
                 <select id="ddlProgramIds" runat="server" multiple size="10" style="width: 250px;">
@@ -217,3 +152,4 @@
     </form>
 </body>
 </html>
+``
