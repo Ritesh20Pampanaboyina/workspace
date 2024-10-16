@@ -1,0 +1,92 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Percentage_Enrollment_UI.aspx.cs" Inherits="Percentage_Enrollment_UI.Percentage_Enrollment_UI" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Percentage Enrollment UI</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h2 { background-color: #4CAF50; color: white; padding: 10px; text-align: center; font-size: 20px; }
+        .form-container { border: 1px solid #ccc; padding: 20px; margin-top: 10px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: inline-block; width: 220px; }
+        input[type="text"], input[type="date"], select { padding: 5px; width: 250px; }
+        .add-btn, .submit-btn, .reset-btn { padding: 5px 15px; color: white; border: none; cursor: pointer; margin-left: 10px; }
+        .add-btn { background-color: #4CAF50; }
+        .submit-btn { background-color: #28a745; }
+        .reset-btn { background-color: #007bff; }
+        .form-actions { margin-top: 20px; text-align: right; }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <h2>Percentage Enrollment Audit Adhoc Selection Criteria</h2>
+
+        <div class="form-container">
+            <div class="form-group">
+                <label for="auditType">Type of Audit:</label>
+                <select id="ddlAuditType" runat="server">
+                    <option value="FOCUS">FOCUS</option>
+                    <option value="RANDOM">RANDOM</option>
+                    <option value="ADHOC">ADHOC</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="enrollmentSpecialist">Choose Enrollment Specialist:</label>
+                <select id="ddlEnrollmentSpecialist" runat="server">
+                    <option value="ALL">ALL</option>
+                </select>
+                <button class="add-btn" type="button">Add>></button>
+            </div>
+
+            <div class="form-group">
+                <label for="dsu">Choose DSU:</label>
+                <select id="ddlDSU" runat="server">
+                    <option value="ALL">ALL</option>
+                </select>
+                <button class="add-btn" type="button">Add>></button>
+            </div>
+
+            <div class="form-group">
+                <label for="groups">Select Groups:</label>
+                <select id="ddlGroups" runat="server">
+                    <option value="ALL">ALL</option>
+                </select>
+                <button class="add-btn" type="button">Add>></button>
+            </div>
+
+            <div class="form-group">
+                <label for="numAddsTerms"># of Adds/Terms:</label>
+                <input type="text" id="txtAddsTerms" runat="server" maxlength="5" />
+            </div>
+
+            <div class="form-group">
+                <label for="percentMemberChanges">% of Member Account Changes:</label>
+                <input type="text" id="txtPercentChanges" runat="server" maxlength="3" />
+            </div>
+
+            <div class="form-group">
+                <label for="beginDate">Begin Date:</label>
+                <input type="date" id="txtBeginDate" runat="server" />
+            </div>
+
+            <div class="form-group">
+                <label for="endDate">End Date:</label>
+                <input type="date" id="txtEndDate" runat="server" />
+            </div>
+
+            <div class="form-actions">
+                <asp:Button ID="btnSubmit" runat="server" Text="Submit Audit Request" CssClass="submit-btn" OnClick="btnSubmit_Click" />
+                <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="reset-btn" OnClick="btnReset_Click" />
+            </div>
+
+            <asp:Label ID="lblMessage" runat="server" ForeColor="Green" Visible="false"></asp:Label>
+
+            <p>**Green Submit button indicates Request not submitted in this 30 min slot**<br>
+               **Please Click Reset Button to reset all the fields**
+            </p>
+        </div>
+    </form>
+</body>
+</html>
