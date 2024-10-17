@@ -19,22 +19,22 @@
 
         /* Checkbox styling */
         input[type="checkbox"] {
-            width: 20px; /* Ensure all checkboxes are the same size */
-            height: 20px;
+            width: 16px; /* Adjust for smaller checkboxes */
+            height: 16px;
             vertical-align: middle;
             margin-right: 10px;
             appearance: none;
             -webkit-appearance: none;
             background-color: #f9f9f9;
-            border: 2px solid #4CAF50;
+            border: 2px solid #007bff; /* Blue border */
             border-radius: 3px;
             cursor: pointer;
         }
 
         /* Checked checkbox styling */
         input[type="checkbox"]:checked {
-            background-color: #4CAF50;
-            border-color: #4CAF50;
+            background-color: #007bff; /* Blue fill when checked */
+            border-color: #007bff;
         }
 
         /* Add a checkmark for checked boxes */
@@ -43,7 +43,7 @@
             display: block;
             text-align: center;
             color: white;
-            font-size: 14px;
+            font-size: 12px;
         }
 
         /* Program list styling */
