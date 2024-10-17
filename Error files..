@@ -1,16 +1,4 @@
-Server Error in '/' Application.
-Parser Error
-Description: An error occurred during the parsing of a resource required to service this request. Please review the following specific parse error details and modify your source file appropriately.
+Msg 208, Level 16, State 1, Procedure dbo.Enrollment_GetProgram, Line 14 [Batch Start Line 0]
+Invalid object name 'CustomDB_OHP..SHPt_Interface_Config_lookup'.
 
-Parser Error Message: The base class includes the field 'lblMessage', but its type (System.Web.UI.WebControls.Label) is not compatible with the type of control (System.Web.UI.HtmlControls.HtmlGenericControl).
-
-Source Error:
-
-
-Line 118:            </div>
-Line 119:
-Line 120:            <label id="lblMessage" runat="server" style="color: Green; display: none;">Audit request submitted successfully!</label>
-Line 121:
-Line 122:            <p>**Green Submit button indicates Request not submitted in this 30 min slot**<br>
-
-Source File: /Percentage_Enrollment_UI.aspx    Line: 120
+Completion time: 2024-10-17T10:16:34.1869014+05:30
