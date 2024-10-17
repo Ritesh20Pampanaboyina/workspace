@@ -1,50 +1,51 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 
-namespace Percentage_Enrollment_UI
+public class DataAccessLayer
 {
-    public class DataAccessLayer
+    private string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["CustomDB"].ConnectionString;
+
+    public DataTable GetPrograms()
     {
-        private string connectionString;
-
-        public DataAccessLayer()
+        using (SqlConnection conn = new SqlConnection(connectionString))
         {
-            connectionString = ConfigurationManager.ConnectionStrings["CustomDB"].ConnectionString;
-        }
-
-        // Fetch programs from the database
-        public DataTable GetPrograms()
-        {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand("Enrollment_GetProgram", conn))
             {
-                using (SqlCommand command = new SqlCommand("Enrollment_GetProgram", connection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-                    connection.Open();
+                cmd.CommandType = CommandType.StoredProcedure;
+                conn.Open();
 
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
-                    {
-                        DataTable programTable = new DataTable();
-                        adapter.Fill(programTable);
-                        return programTable;
-                    }
+                using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                {
+                    DataTable programs = new DataTable();
+                    adapter.Fill(programs);
+                    return programs;
                 }
             }
         }
+    }
 
-        public void ExecuteStoredProcedure(string procedureName, SqlParameter[] parameters)
+    public void SubmitAuditRequest(string auditType, string enrollmentSpecialist, string dsu, string groups, int numAddsTerms,
+        decimal percentChanges, DateTime beginDate, DateTime endDate, string selectedPrograms)
+    {
+        using (SqlConnection conn = new SqlConnection(connectionString))
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand("Submit_AuditRequest", conn))
             {
-                using (SqlCommand command = new SqlCommand(procedureName, connection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddRange(parameters);
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                }
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@AuditType", auditType);
+                cmd.Parameters.AddWithValue("@EnrollmentSpecialist", enrollmentSpecialist);
+                cmd.Parameters.AddWithValue("@DSU", dsu);
+                cmd.Parameters.AddWithValue("@Groups", groups);
+                cmd.Parameters.AddWithValue("@NumAddsTerms", numAddsTerms);
+                cmd.Parameters.AddWithValue("@PercentChanges", percentChanges);
+                cmd.Parameters.AddWithValue("@BeginDate", beginDate);
+                cmd.Parameters.AddWithValue("@EndDate", endDate);
+                cmd.Parameters.AddWithValue("@SelectedPrograms", selectedPrograms);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
             }
         }
     }
