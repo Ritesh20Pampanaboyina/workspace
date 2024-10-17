@@ -19,25 +19,22 @@
 
         /* Checkbox styling */
         input[type="checkbox"] {
-            width: 16px; /* Adjust for smaller checkboxes */
+            width: 16px;
             height: 16px;
             vertical-align: middle;
             margin-right: 10px;
             appearance: none;
-            -webkit-appearance: none;
             background-color: #f9f9f9;
-            border: 2px solid #007bff; /* Blue border */
+            border: 2px solid #007bff;
             border-radius: 3px;
             cursor: pointer;
         }
 
-        /* Checked checkbox styling */
         input[type="checkbox"]:checked {
-            background-color: #007bff; /* Blue fill when checked */
+            background-color: #007bff;
             border-color: #007bff;
         }
 
-        /* Add a checkmark for checked boxes */
         input[type="checkbox"]:checked::after {
             content: '✔'; 
             display: block;
@@ -47,17 +44,14 @@
         }
 
         /* Program list styling */
-        #ddlProgramIds {
+        .program-checkboxes {
             width: 250px;
+            height: 150px;
             padding: 5px;
+            border: 1px solid #ccc;
+            overflow-y: scroll;
         }
 
-        .form-group select[multiple] {
-            height: auto;
-            width: 250px;
-        }
-
-        /* Adjust the container for the 'Select All' checkbox */
         .form-group label[for="chkSelectAll"] {
             display: inline-flex;
             align-items: center;
@@ -65,9 +59,9 @@
     </style>
     <script type="text/javascript">
         function selectAllPrograms(selectAll) {
-            var programList = document.getElementById('<%= ddlProgramIds.ClientID %>');
-            for (var i = 0; i < programList.options.length; i++) {
-                programList.options[i].selected = selectAll.checked;
+            var checkboxes = document.getElementsByClassName('program-checkbox');
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = selectAll.checked;
             }
         }
     </script>
@@ -78,92 +72,96 @@
 
         <div class="form-container">
             <div class="form-group">
-                <label for="auditType">Type of Audit:</label>
-                <select id="ddlAuditType" runat="server">
-                    <option value="FOCUS">FOCUS</option>
-                    <option value="RANDOM">RANDOM</option>
-                    <option value="ADHOC">ADHOC</option>
-                </select>
+                <label for="ddlAuditType">Type of Audit:</label>
+                <asp:DropDownList ID="ddlAuditType" runat="server">
+                    <asp:ListItem Value="FOCUS">FOCUS</asp:ListItem>
+                    <asp:ListItem Value="RANDOM">RANDOM</asp:ListItem>
+                    <asp:ListItem Value="ADHOC">ADHOC</asp:ListItem>
+                </asp:DropDownList>
             </div>
 
             <div class="form-group">
-                <label for="enrollmentSpecialist">Choose Enrollment Specialist:</label>
-                <select id="ddlEnrollmentSpecialist" runat="server">
-                    <option value="ALL">ALL</option>
-                    <option value="Specialist1">Specialist 1</option>
-                    <option value="Specialist2">Specialist 2</option>
-                    <option value="Specialist3">Specialist 3</option>
-                </select>
+                <label for="ddlEnrollmentSpecialist">Choose Enrollment Specialist:</label>
+                <asp:DropDownList ID="ddlEnrollmentSpecialist" runat="server">
+                    <asp:ListItem Value="ALL">ALL</asp:ListItem>
+                    <asp:ListItem Value="Specialist1">Specialist 1</asp:ListItem>
+                    <asp:ListItem Value="Specialist2">Specialist 2</asp:ListItem>
+                    <asp:ListItem Value="Specialist3">Specialist 3</asp:ListItem>
+                </asp:DropDownList>
                 <button class="add-btn" type="button">Add>></button>
             </div>
 
             <div class="form-group">
-                <label for="dsu">Choose DSU:</label>
-                <select id="ddlDSU" runat="server">
-                    <option value="ALL">ALL</option>
-                    <option value="DSU1">DSU 1</option>
-                    <option value="DSU2">DSU 2</option>
-                    <option value="DSU3">DSU 3</option>
-                </select>
+                <label for="ddlDSU">Choose DSU:</label>
+                <asp:DropDownList ID="ddlDSU" runat="server">
+                    <asp:ListItem Value="ALL">ALL</asp:ListItem>
+                    <asp:ListItem Value="DSU1">DSU 1</asp:ListItem>
+                    <asp:ListItem Value="DSU2">DSU 2</asp:ListItem>
+                    <asp:ListItem Value="DSU3">DSU 3</asp:ListItem>
+                </asp:DropDownList>
                 <button class="add-btn" type="button">Add>></button>
             </div>
 
             <div class="form-group">
-                <label for="groups">Select Groups:</label>
-                <select id="ddlGroups" runat="server">
-                    <option value="ALL">ALL</option>
-                    <option value="Group1">Group 1</option>
-                    <option value="Group2">Group 2</option>
-                    <option value="Group3">Group 3</option>
-                </select>
+                <label for="ddlGroups">Select Groups:</label>
+                <asp:DropDownList ID="ddlGroups" runat="server">
+                    <asp:ListItem Value="ALL">ALL</asp:ListItem>
+                    <asp:ListItem Value="Group1">Group 1</asp:ListItem>
+                    <asp:ListItem Value="Group2">Group 2</asp:ListItem>
+                    <asp:ListItem Value="Group3">Group 3</asp:ListItem>
+                </asp:DropDownList>
                 <button class="add-btn" type="button">Add>></button>
             </div>
 
             <div class="form-group">
-                <label for="numAddsTerms"># of Adds/Terms:</label>
-                <input type="text" id="txtAddsTerms" runat="server" maxlength="5" />
+                <label for="txtAddsTerms"># of Adds/Terms:</label>
+                <asp:TextBox ID="txtAddsTerms" runat="server" MaxLength="5" />
             </div>
 
             <div class="form-group">
-                <label for="percentMemberChanges">% of Member Account Changes:</label>
-                <input type="text" id="txtPercentChanges" runat="server" maxlength="3" />
+                <label for="txtPercentChanges">% of Member Account Changes:</label>
+                <asp:TextBox ID="txtPercentChanges" runat="server" MaxLength="3" />
             </div>
 
             <div class="form-group">
-                <label for="beginDate">Begin Date:</label>
-                <input type="date" id="txtBeginDate" runat="server" />
+                <label for="txtBeginDate">Begin Date:</label>
+                <asp:TextBox ID="txtBeginDate" runat="server" TextMode="Date" />
             </div>
 
             <div class="form-group">
-                <label for="endDate">End Date:</label>
-                <input type="date" id="txtEndDate" runat="server" />
+                <label for="txtEndDate">End Date:</label>
+                <asp:TextBox ID="txtEndDate" runat="server" TextMode="Date" />
             </div>
 
             <div class="form-group">
                 <input type="checkbox" id="chkSelectAll" onclick="selectAllPrograms(this)" checked /> 
                 <label for="chkSelectAll">Select All</label>
                 <br />
-                <select id="ddlProgramIds" runat="server" multiple size="10" style="width: 250px;">
-                    <option>PGMC0000000505</option>
-                    <option>PGMC0000000506</option>
-                    <option>PGMC0000000507</option>
-                    <option>PGMP0000000004</option>
-                    <option>PGMP0000000005</option>
-                    <option>PGMP0000000007</option>
-                    <option>PGMP0000000008</option>
-                </select>
+                <div class="program-checkboxes" runat="server" id="programCheckboxes">
+                    <!-- Program checkboxes dynamically generated -->
+                    <div><strong>Available Programs:</strong></div>
+                    <!-- Manually added checkboxes for hardcoded program IDs -->
+                    <asp:CheckBox ID="chkProgram_PGMP0000000004" runat="server" Text="PGMP0000000004" CssClass="program-checkbox" Checked="true" />
+                    <asp:CheckBox ID="chkProgram_PGM0000000348" runat="server" Text="PGM0000000348" CssClass="program-checkbox" Checked="true" />
+                    <asp:CheckBox ID="chkProgram_PGM0000000349" runat="server" Text="PGM0000000349" CssClass="program-checkbox" Checked="true" />
+                    <asp:CheckBox ID="chkProgram_PGM0000000352" runat="server" Text="PGM0000000352" CssClass="program-checkbox" Checked="true" />
+                    <asp:CheckBox ID="chkProgram_PGM0000000353" runat="server" Text="PGM0000000353" CssClass="program-checkbox" Checked="true" />
+                    <asp:CheckBox ID="chkProgram_PGMP0000000005" runat="server" Text="PGMP0000000005" CssClass="program-checkbox" Checked="true" />
+                    <asp:CheckBox ID="chkProgram_PGMP0000000007" runat="server" Text="PGMP0000000007" CssClass="program-checkbox" Checked="true" />
+                    <asp:CheckBox ID="chkProgram_PGMP0000000008" runat="server" Text="PGMP0000000008" CssClass="program-checkbox" Checked="true" />
+                    <asp:CheckBox ID="chkProgram_PGMP0000000009" runat="server" Text="PGMP0000000009" CssClass="program-checkbox" Checked="true" />
+                    <asp:CheckBox ID="chkProgram_PGMP0000000010" runat="server" Text="PGMP0000000010" CssClass="program-checkbox" Checked="true" />
+                    <asp:CheckBox ID="chkProgram_PGMP0000000019" runat="server" Text="PGMP0000000019" CssClass="program-checkbox" Checked="true" />
+                    <asp:CheckBox ID="chkProgram_PGMP0000000020" runat="server" Text="PGMP0000000020" CssClass="program-checkbox" Checked="true" />
+                </div>
             </div>
 
             <div class="form-actions">
-                <button class="submit-btn" type="submit" runat="server" onserverclick="btnSubmit_Click">Submit Audit Request</button>
-                <button class="reset-btn" type="reset" runat="server" onserverclick="btnReset_Click">Reset</button>
+                <asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="submit-btn" OnClick="btnSubmit_Click" />
+                <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="reset-btn" OnClick="btnReset_Click" />
             </div>
 
-            <asp:Label ID="lblMessage" runat="server" style="color: Green; display: none;">Audit request submitted successfully!</asp:Label>
-
-            <p>**Green Submit button indicates Request not submitted in this 30 min slot**<br>
-               **Please Click Reset Button to reset all the fields**
-            </p>
+            <asp:Label ID="lblMessage" runat="server" Visible="false" ForeColor="Green" />
         </div>
     </form>
 </body>
