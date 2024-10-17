@@ -122,25 +122,12 @@
                 <input type="checkbox" id="chkSelectAll" onclick="selectAllPrograms(this)" checked /> 
                 <label for="chkSelectAll">Select All</label>
                 <br />
-                <select id="ddlProgramIds" runat="server" multiple size="10" style="width: 250px;">
-                    <option value="PGMP0000000004" selected>PGMP0000000004</option>
-                    <option value="PGM0000000348" selected>PGM0000000348</option>
-                    <option value="PGM0000000349">PGM0000000349</option>
-                    <option value="PGM0000000352">PGM0000000352</option>
-                    <option value="PGM0000000353">PGM0000000353</option>
-                    <option value="PGMP0000000005">PGMP0000000005</option>
-                    <option value="PGMP0000000007">PGMP0000000007</option>
-                    <option value="PGMP0000000008">PGMP0000000008</option>
-                    <option value="PGMP0000000009">PGMP0000000009</option>
-                    <option value="PGMP0000000010">PGMP0000000010</option>
-                    <option value="PGMP0000000019">PGMP0000000019</option>
-                    <option value="PGMP0000000020">PGMP0000000020</option>
-                </select>
+                <select id="ddlProgramIds" runat="server" multiple size="10" style="width: 250px;"></select>
             </div>
 
             <div class="form-actions">
-                <button class="submit-btn" type="submit">Submit Audit Request</button>
-                <button class="reset-btn" type="reset">Reset</button>
+                <button class="submit-btn" type="submit" runat="server" onserverclick="btnSubmit_Click">Submit Audit Request</button>
+                <button class="reset-btn" type="reset" runat="server" onserverclick="btnReset_Click">Reset</button>
             </div>
 
             <asp:Label ID="lblMessage" runat="server" style="color: Green; display: none;">Audit request submitted successfully!</asp:Label>
@@ -152,4 +139,3 @@
     </form>
 </body>
 </html>
-``
