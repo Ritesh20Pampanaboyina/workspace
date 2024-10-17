@@ -30,3 +30,5 @@ BEGIN
         -- Optional: Log error or throw
     END CATCH;
 END;
+
+EXEC [dbo].[Enrollment_GetProgram];
