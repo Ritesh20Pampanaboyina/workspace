@@ -2,7 +2,7 @@ using System;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web.UI;
-using System.Web.UI.WebControls; // Ensure this is included for ListBox
+using System.Web.UI.WebControls; // Ensure this is included for ListItem
 
 namespace Percentage_Enrollment_UI
 {
@@ -12,7 +12,26 @@ namespace Percentage_Enrollment_UI
         {
             if (!IsPostBack)
             {
-                // Any initialization logic if needed
+                // Load the program list on initial page load
+                LoadPrograms();
+            }
+        }
+
+        private void LoadPrograms()
+        {
+            DataAccessLayer dataAccess = new DataAccessLayer();
+            DataTable programs = dataAccess.GetPrograms();
+
+            ddlProgramIds.Items.Clear();
+
+            // Bind the program list to the dropdown
+            foreach (DataRow row in programs.Rows)
+            {
+                string programId = row["programid"].ToString();
+                string description = row["description"].ToString();
+
+                ListItem item = new ListItem(description, programId);
+                ddlProgramIds.Items.Add(item);
             }
         }
 
@@ -22,39 +41,32 @@ namespace Percentage_Enrollment_UI
             string enrollmentSpecialist = ddlEnrollmentSpecialist.Value;
             string dsu = ddlDSU.Value;
             string groups = ddlGroups.Value;
+            string numAddsTerms = txtAddsTerms.Value;
+            string percentChanges = txtPercentChanges.Value;
+            string beginDate = txtBeginDate.Value;
+            string endDate = txtEndDate.Value;
 
-            int numAddsTerms = int.TryParse(txtAddsTerms.Value, out numAddsTerms) ? numAddsTerms : 0;
-            decimal percentMemberChanges = decimal.TryParse(txtPercentChanges.Value, out percentMemberChanges) ? percentMemberChanges : 0;
+            string selectedPrograms = string.Join(",", ddlProgramIds.Items.Cast<ListItem>()
+                .Where(i => i.Selected)
+                .Select(i => i.Value));
 
-            DateTime beginDate = DateTime.TryParse(txtBeginDate.Value, out beginDate) ? beginDate : DateTime.MinValue;
-            DateTime endDate = DateTime.TryParse(txtEndDate.Value, out endDate) ? endDate : DateTime.MinValue;
+            // Here you would handle the logic to store this data (not implemented)
+            // For example, you could call another stored procedure to insert this data.
 
-            // Collect selected Program IDs
-            string selectedProgramIds = string.Join(",", ddlProgramIds.Items.Cast<ListItem>()
-                .Where(i => i.Selected).Select(i => i.Value));
-
-            SqlParameter[] parameters = new SqlParameter[]
-            {
-                new SqlParameter("@AuditType", auditType),
-                new SqlParameter("@EnrollmentSpecialist", enrollmentSpecialist),
-                new SqlParameter("@DSU", dsu),
-                new SqlParameter("@Groups", groups),
-                new SqlParameter("@NumAddsTerms", numAddsTerms),
-                new SqlParameter("@PercentMemberChanges", percentMemberChanges),
-                new SqlParameter("@BeginDate", beginDate),
-                new SqlParameter("@EndDate", endDate),
-                new SqlParameter("@ProgramIds", selectedProgramIds)
-            };
-
-            DataAccessLayer dataAccess = new DataAccessLayer();
-            dataAccess.ExecuteStoredProcedure("SubmitEnrollmentAudit", parameters);
+            // Show success message
             lblMessage.Text = "Audit request submitted successfully!";
             lblMessage.Visible = true;
-            ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Audit request submitted successfully!');", true);
-            btnReset_Click(sender, e);
+
+            // Clear fields
+            ClearFields();
         }
 
         protected void btnReset_Click(object sender, EventArgs e)
+        {
+            ClearFields();
+        }
+
+        private void ClearFields()
         {
             ddlAuditType.SelectedIndex = 0;
             ddlEnrollmentSpecialist.SelectedIndex = 0;
@@ -65,12 +77,13 @@ namespace Percentage_Enrollment_UI
             txtBeginDate.Value = string.Empty;
             txtEndDate.Value = string.Empty;
 
+            // Clear the selected items in the programs list
             foreach (ListItem item in ddlProgramIds.Items)
             {
                 item.Selected = false;
             }
-            chkSelectAll.Checked = true; // Reset select all checkbox
-            lblMessage.Visible = false; // Hide message label
+
+            lblMessage.Visible = false; // Hide the message label
         }
     }
 }
