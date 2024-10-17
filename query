@@ -1,37 +1,32 @@
-
-/****** Object:  StoredProcedure [dbo].[SHPp_Percentage_Claim_GetProgram]    Script Date: 12/4/2023 5:22:58 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE OR ALTER   procedure [dbo].[SHPp_Percentage_Claim_GetProgram]
+
+CREATE OR ALTER PROCEDURE [dbo].[Enrollment_GetProgram]
 AS
 BEGIN
-	SET XACT_ABORT ON;
-	SET NOCOUNT ON;
+    SET XACT_ABORT ON;
+    SET NOCOUNT ON;
 
-	DECLARE	@spName		varchar(100)
-			
-	-- Add declare variables
+    DECLARE @spName varchar(100);
+    -- Declare other variables as needed
 
-	SELECT @spName = OBJECT_SCHEMA_NAME(@@procid) + '.' + OBJECT_NAME(@@procid)
+    SELECT @spName = OBJECT_SCHEMA_NAME(@@procid) + '.' + OBJECT_NAME(@@procid);
 
-	BEGIN TRY
-
-		select lookupvalue as programid,lookupdesc as description from  CustomDB_OHP..SHPt_Interface_Config_lookup clkp (NOLOCK) where InterfaceId='int00000240' and lookupname='Program' and healthplan='OHP' and GETDATE() between effectivedate and termdate
-
+    BEGIN TRY
+        SELECT lookupvalue AS programid, lookupdesc AS description
+        FROM CustomDB_OHP..SHPt_Interface_Config_lookup clkp (NOLOCK)
+        WHERE InterfaceId = 'int00000240'
+          AND lookupname = 'Program'
+          AND healthplan = 'OHP'
+          AND GETDATE() BETWEEN effectivedate AND termdate;
     END TRY
-
-	BEGIN CATCH
-
-		DECLARE @ErrorMessage		varchar(max)
-				, @ErrorSeverity	int
-				, @ErrorState		int
-		SELECT @ErrorMessage = @spName + ' failed. Error - ' +  ERROR_MESSAGE()
-				, @ErrorSeverity	= ERROR_SEVERITY()
-				, @ErrorState		= ERROR_STATE()
-
-	END CATCH
-
-End
-
+    BEGIN CATCH
+        DECLARE @ErrorMessage varchar(max), @ErrorSeverity int, @ErrorState int;
+        SELECT @ErrorMessage = @spName + ' failed. Error - ' + ERROR_MESSAGE(),
+               @ErrorSeverity = ERROR_SEVERITY(),
+               @ErrorState = ERROR_STATE();
+        -- Optional: Log error or throw
+    END CATCH;
+END;
