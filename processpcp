@@ -1,9 +1,6 @@
-select * from plandata..member (nolock) 
-where memid in (
-'MEM28000839379', 
-'MEM28000842252') 
---'MEM28000842363', 
---'MEM28700848992', 
---'MEM28700852740', 
---'MEM28700858757' )
-and DATEDIFF(YEAR, dob, GETDATE()) > 18 
+UPDATE plandata..member WITH (NOLOCK)
+SET dob = CASE
+            WHEN memid = 'MEM28000839379' THEN '2004-01-01'
+            WHEN memid = 'MEM28000842252' THEN '2006-01-01'
+          END
+WHERE memid IN ('MEM28000839379', 'MEM28000842252');
