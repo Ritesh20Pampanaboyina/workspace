@@ -1,0 +1,172 @@
+USE [CustomDB]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[SHPt_Enrollment_stg_BOT_UserNames]
+(
+	[BOT_USERNAMES] [varchar](120) NOT NULL,
+	[BOT_USERNAMES_EXCLUDED] [varchar](120) NOT NULL,
+	[BOT_USERNAMES_FOCUS_EXCLUDED] [varchar](120) NOT NULL
+) ON [PRIMARY]
+GO
+
+
+
+USE [CustomDB]
+GO
+SET ANSI_NULLS ON
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SHPt_240_stg_Enrollment_Audits]') AND type in (N'U'))
+DROP TABLE [dbo].[SHPt_240_stg_Enrollment_Audits]
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE  TABLE [dbo].[SHPt_240_stg_Enrollment_Audits] (
+    EnrollmentSpecialistHostAcct varchar(100),
+    TransactionType varchar(100),
+    [Sponsor/Group] varchar(100),
+    MemberID varchar(100),
+    MemberName varchar(100),
+    Reason varchar(500),
+    EffectiveDate date , 
+    EnterDate DATE,
+    AuditType varchar(100),
+    LOB varchar(100),
+    LOBSecondary varchar(100),
+    Address1 varchar(100),
+    Address2 varchar(100),
+    City varchar(100),
+    State varchar(100),
+    ZipCode varchar(100),
+    HireDate DATE,
+    HomePhone varchar(100),
+    WorkPhone varchar(100),
+    MobilePhone varchar(100),
+    SSN varchar(100),
+    SSNRefDate DATE,
+    Relationship varchar(100),
+    DateOfBirth DATE,
+    Gender varchar(100),
+    PCP varchar(100),
+    LOIType varchar(100),
+    LOIEffectiveDate DATE,
+    LOITermDate DATE,
+    HSAHRAFlag char(2),
+    HSAHRAEffectiveDate DATE,
+    MedicaidID varchar(100),
+    FIPSCode varchar(100),
+    EnrollmentSpecialistMacessAcct varchar(100),
+    [Plan] varchar(100),
+    AidCategory varchar(100),
+    SkilledCare varchar(100),
+    CoverageCodes varchar(100),
+    PolicyNumber varchar(100),
+    HealthPlanID varchar(100),
+    MBI varchar(100)
+);
+
+GO
+
+
+
+
+USE [CustomDB]
+GO
+SET ANSI_NULLS ON
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SHPt_240_stg_Enrollment_Audits_History]') AND type in (N'U'))
+DROP TABLE [dbo].[SHPt_240_stg_Enrollment_Audits_History]
+
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[SHPt_240_stg_Enrollment_Audits_History] (
+     EnrollmentSpecialistHostAcct varchar(100),
+    TransactionType varchar(100),
+    [Sponsor/Group] varchar(100),
+    MemberID varchar(100),
+    MemberName varchar(100),
+    Reason varchar(500),
+    EffectiveDate date , 
+    EnterDate DATE,
+    AuditType varchar(100),
+    LOB varchar(100),
+    LOBSecondary varchar(100),
+    Address1 varchar(100),
+    Address2 varchar(100),
+    City varchar(100),
+    State varchar(100),
+    ZipCode varchar(100),
+    HireDate DATE,
+    HomePhone varchar(100),
+    WorkPhone varchar(100),
+    MobilePhone varchar(100),
+    SSN varchar(100),
+    SSNRefDate DATE,
+    Relationship varchar(100),
+    DateOfBirth DATE,
+    Gender varchar(100),
+    PCP varchar(100),
+    LOIType varchar(100),
+    LOIEffectiveDate DATE,
+    LOITermDate DATE,
+    HSAHRAFlag char(2),
+    HSAHRAEffectiveDate DATE,
+    MedicaidID varchar(100),
+    FIPSCode varchar(100),
+    EnrollmentSpecialistMacessAcct varchar(100),
+    [Plan] varchar(100),
+    AidCategory varchar(100),
+    SkilledCare varchar(100),
+    CoverageCodes varchar(100),
+    PolicyNumber varchar(100),
+    HealthPlanID varchar(100),
+    MBI varchar(100),
+	JobRunType [char](20) NULL,
+	[createid] [varchar](95) NULL,
+	[createdate] [smalldatetime] NULL,
+	[updateid] [varchar](95) NULL,
+	[lastupdate] [smalldatetime] NULL    
+    
+);
+GO
+
+ALTER TABLE [dbo].[SHPt_240_stg_Enrollment_Audits_History] ADD  DEFAULT (user_name()) FOR [createid]
+GO
+
+ALTER TABLE [dbo].[SHPt_240_stg_Enrollment_Audits_History] ADD  DEFAULT (getdate()) FOR [createdate]
+GO
+
+ALTER TABLE [dbo].[SHPt_240_stg_Enrollment_Audits_History] ADD  DEFAULT (user_name()) FOR [updateid]
+GO
+
+ALTER TABLE [dbo].[SHPt_240_stg_Enrollment_Audits_History] ADD  DEFAULT (getdate()) FOR [lastupdate]
+GO
+
+
+
+
+USE [CustomDB]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[SHPt_stg_Enrollment_Audits_XML](
+	[SLNO] [int] NULL,
+	[XMLDATA] [varchar](max) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+
+
+
+
