@@ -1,172 +1,156 @@
-USE [CustomDB]
+USE [CustomDB];
 GO
 
-SET ANSI_NULLS ON
+SET ANSI_NULLS ON;
 GO
 
-SET QUOTED_IDENTIFIER ON
+SET QUOTED_IDENTIFIER ON;
 GO
 
-CREATE TABLE [dbo].[SHPt_Enrollment_stg_BOT_UserNames]
-(
-	[BOT_USERNAMES] [varchar](120) NOT NULL,
-	[BOT_USERNAMES_EXCLUDED] [varchar](120) NOT NULL,
-	[BOT_USERNAMES_FOCUS_EXCLUDED] [varchar](120) NOT NULL
-) ON [PRIMARY]
+CREATE TABLE [dbo].[SHPt_Enrollment_stg_BOT_UserNames] (
+    [BOT_USERNAMES] VARCHAR(120) NOT NULL,
+    [BOT_USERNAMES_EXCLUDED] VARCHAR(120) NOT NULL,
+    [BOT_USERNAMES_FOCUS_EXCLUDED] VARCHAR(120) NOT NULL
+) ON [PRIMARY];
 GO
 
 
+USE [CustomDB];
+GO
 
-USE [CustomDB]
+SET ANSI_NULLS ON;
 GO
-SET ANSI_NULLS ON
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SHPt_240_stg_Enrollment_Audits]') AND type in (N'U'))
+DROP TABLE [dbo].[SHPt_240_stg_Enrollment_Audits];
 GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SHPt_240_stg_Enrollment_Audits]') AND type in (N'U'))
-DROP TABLE [dbo].[SHPt_240_stg_Enrollment_Audits]
+
+SET QUOTED_IDENTIFIER ON;
 GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE  TABLE [dbo].[SHPt_240_stg_Enrollment_Audits] (
-    EnrollmentSpecialistHostAcct varchar(100),
-    TransactionType varchar(100),
-    [Sponsor/Group] varchar(100),
-    MemberID varchar(100),
-    MemberName varchar(100),
-    Reason varchar(500),
-    EffectiveDate date , 
+
+CREATE TABLE [dbo].[SHPt_240_stg_Enrollment_Audits] (
+    EnrollmentSpecialistHostAcct VARCHAR(100),
+    TransactionType VARCHAR(100),
+    [Sponsor/Group] VARCHAR(100),
+    MemberID VARCHAR(100),
+    MemberName VARCHAR(100),
+    Reason VARCHAR(500),
+    EffectiveDate DATE, 
     EnterDate DATE,
-    AuditType varchar(100),
-    LOB varchar(100),
-    LOBSecondary varchar(100),
-    Address1 varchar(100),
-    Address2 varchar(100),
-    City varchar(100),
-    State varchar(100),
-    ZipCode varchar(100),
+    AuditType VARCHAR(100),
+    LOB VARCHAR(100),
+    LOBSecondary VARCHAR(100),
+    Address1 VARCHAR(100),
+    Address2 VARCHAR(100),
+    City VARCHAR(100),
+    State VARCHAR(100),
+    ZipCode VARCHAR(100),
     HireDate DATE,
-    HomePhone varchar(100),
-    WorkPhone varchar(100),
-    MobilePhone varchar(100),
-    SSN varchar(100),
+    HomePhone VARCHAR(100),
+    WorkPhone VARCHAR(100),
+    MobilePhone VARCHAR(100),
+    SSN VARCHAR(100),
     SSNRefDate DATE,
-    Relationship varchar(100),
+    Relationship VARCHAR(100),
     DateOfBirth DATE,
-    Gender varchar(100),
-    PCP varchar(100),
-    LOIType varchar(100),
+    Gender VARCHAR(100),
+    PCP VARCHAR(100),
+    LOIType VARCHAR(100),
     LOIEffectiveDate DATE,
     LOITermDate DATE,
-    HSAHRAFlag char(2),
+    HSAHRAFlag CHAR(2),
     HSAHRAEffectiveDate DATE,
-    MedicaidID varchar(100),
-    FIPSCode varchar(100),
-    EnrollmentSpecialistMacessAcct varchar(100),
-    [Plan] varchar(100),
-    AidCategory varchar(100),
-    SkilledCare varchar(100),
-    CoverageCodes varchar(100),
-    PolicyNumber varchar(100),
-    HealthPlanID varchar(100),
-    MBI varchar(100)
+    MedicaidID VARCHAR(100),
+    FIPSCode VARCHAR(100),
+    EnrollmentSpecialistMacessAcct VARCHAR(100),
+    [Plan] VARCHAR(100),
+    AidCategory VARCHAR(100),
+    SkilledCare VARCHAR(100),
+    CoverageCodes VARCHAR(100),
+    PolicyNumber VARCHAR(100),
+    HealthPlanID VARCHAR(100),
+    MBI VARCHAR(100)
 );
-
 GO
 
 
-
-
-USE [CustomDB]
+USE [CustomDB];
 GO
-SET ANSI_NULLS ON
-GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SHPt_240_stg_Enrollment_Audits_History]') AND type in (N'U'))
-DROP TABLE [dbo].[SHPt_240_stg_Enrollment_Audits_History]
 
-SET QUOTED_IDENTIFIER ON
+SET ANSI_NULLS ON;
 GO
+
+IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SHPt_240_stg_Enrollment_Audits_History]') AND type in (N'U'))
+DROP TABLE [dbo].[SHPt_240_stg_Enrollment_Audits_History];
+GO
+
+SET QUOTED_IDENTIFIER ON;
+GO
+
 CREATE TABLE [dbo].[SHPt_240_stg_Enrollment_Audits_History] (
-     EnrollmentSpecialistHostAcct varchar(100),
-    TransactionType varchar(100),
-    [Sponsor/Group] varchar(100),
-    MemberID varchar(100),
-    MemberName varchar(100),
-    Reason varchar(500),
-    EffectiveDate date , 
+    EnrollmentSpecialistHostAcct VARCHAR(100),
+    TransactionType VARCHAR(100),
+    [Sponsor/Group] VARCHAR(100),
+    MemberID VARCHAR(100),
+    MemberName VARCHAR(100),
+    Reason VARCHAR(500),
+    EffectiveDate DATE, 
     EnterDate DATE,
-    AuditType varchar(100),
-    LOB varchar(100),
-    LOBSecondary varchar(100),
-    Address1 varchar(100),
-    Address2 varchar(100),
-    City varchar(100),
-    State varchar(100),
-    ZipCode varchar(100),
+    AuditType VARCHAR(100),
+    LOB VARCHAR(100),
+    LOBSecondary VARCHAR(100),
+    Address1 VARCHAR(100),
+    Address2 VARCHAR(100),
+    City VARCHAR(100),
+    State VARCHAR(100),
+    ZipCode VARCHAR(100),
     HireDate DATE,
-    HomePhone varchar(100),
-    WorkPhone varchar(100),
-    MobilePhone varchar(100),
-    SSN varchar(100),
+    HomePhone VARCHAR(100),
+    WorkPhone VARCHAR(100),
+    MobilePhone VARCHAR(100),
+    SSN VARCHAR(100),
     SSNRefDate DATE,
-    Relationship varchar(100),
+    Relationship VARCHAR(100),
     DateOfBirth DATE,
-    Gender varchar(100),
-    PCP varchar(100),
-    LOIType varchar(100),
+    Gender VARCHAR(100),
+    PCP VARCHAR(100),
+    LOIType VARCHAR(100),
     LOIEffectiveDate DATE,
     LOITermDate DATE,
-    HSAHRAFlag char(2),
+    HSAHRAFlag CHAR(2),
     HSAHRAEffectiveDate DATE,
-    MedicaidID varchar(100),
-    FIPSCode varchar(100),
-    EnrollmentSpecialistMacessAcct varchar(100),
-    [Plan] varchar(100),
-    AidCategory varchar(100),
-    SkilledCare varchar(100),
-    CoverageCodes varchar(100),
-    PolicyNumber varchar(100),
-    HealthPlanID varchar(100),
-    MBI varchar(100),
-	JobRunType [char](20) NULL,
-	[createid] [varchar](95) NULL,
-	[createdate] [smalldatetime] NULL,
-	[updateid] [varchar](95) NULL,
-	[lastupdate] [smalldatetime] NULL    
-    
+    MedicaidID VARCHAR(100),
+    FIPSCode VARCHAR(100),
+    EnrollmentSpecialistMacessAcct VARCHAR(100),
+    [Plan] VARCHAR(100),
+    AidCategory VARCHAR(100),
+    SkilledCare VARCHAR(100),
+    CoverageCodes VARCHAR(100),
+    PolicyNumber VARCHAR(100),
+    HealthPlanID VARCHAR(100),
+    MBI VARCHAR(100),
+    JobRunType CHAR(20) NULL,
+    [createid] VARCHAR(95) NULL DEFAULT (user_name()),
+    [createdate] SMALLDATETIME NULL DEFAULT (getdate()),
+    [updateid] VARCHAR(95) NULL DEFAULT (user_name()),
+    [lastupdate] SMALLDATETIME NULL DEFAULT (getdate())
 );
 GO
 
-ALTER TABLE [dbo].[SHPt_240_stg_Enrollment_Audits_History] ADD  DEFAULT (user_name()) FOR [createid]
+
+USE [CustomDB];
 GO
 
-ALTER TABLE [dbo].[SHPt_240_stg_Enrollment_Audits_History] ADD  DEFAULT (getdate()) FOR [createdate]
+SET ANSI_NULLS ON;
 GO
 
-ALTER TABLE [dbo].[SHPt_240_stg_Enrollment_Audits_History] ADD  DEFAULT (user_name()) FOR [updateid]
+SET QUOTED_IDENTIFIER ON;
 GO
 
-ALTER TABLE [dbo].[SHPt_240_stg_Enrollment_Audits_History] ADD  DEFAULT (getdate()) FOR [lastupdate]
+CREATE TABLE [dbo].[SHPt_stg_Enrollment_Audits_XML] (
+    [SLNO] INT NULL,
+    [XMLDATA] VARCHAR(MAX) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY];
 GO
-
-
-
-
-USE [CustomDB]
-GO
-
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE TABLE [dbo].[SHPt_stg_Enrollment_Audits_XML](
-	[SLNO] [int] NULL,
-	[XMLDATA] [varchar](max) NULL
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
-
-
-
-
 
 
