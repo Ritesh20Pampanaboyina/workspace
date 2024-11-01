@@ -1,0 +1,169 @@
+BEGIN TRANSACTION;
+
+-- Delete the record for the interface
+DELETE	-- select * 
+FROM  [dbo].[SHPt_Interface_Adhoc_Param]
+WHERE InterfaceId = 'INT00000240'
+
+INSERT INTO [SHPt_Interface_Adhoc_Param] (
+	InterfaceId
+	,InterfaceRowId
+	,lookupname
+	,lookupvalue
+	,lookupdesc
+	,effstartdate
+	,effenddate
+	,IsAdhoc
+	)
+VALUES (
+	'INT00000240'
+	,1
+	,'AdhocDateFrom'
+	,'2024-10-20'
+	, 'Start date'
+	,'2022-01-01 00:00:00'
+	,'2078-12-31 00:00:00'
+	,'N')
+
+INSERT INTO [SHPt_Interface_Adhoc_Param] (
+	InterfaceId
+	,InterfaceRowId
+	,lookupname
+	,lookupvalue
+	,lookupdesc
+	,effstartdate
+	,effenddate
+	,IsAdhoc
+	)
+VALUES (
+	'INT00000240'
+	,2
+	,'AdhocDateTo'
+	,'2024-10-26'
+	, 'End date'
+	,'2022-01-01 00:00:00'
+	,'2078-12-31 00:00:00'
+	,'N')
+
+--INSERT INTO [SHPt_Interface_Adhoc_Param] (
+--	InterfaceId
+--	,InterfaceRowId
+--	,lookupname
+--	,lookupvalue
+--	,lookupdesc
+--	,effstartdate
+--	,effenddate
+--	,IsAdhoc
+--	)
+--VALUES (
+--	'INT00000240'
+--	,3
+--	,'LastRun_Date'
+--	,'2024-10-07'
+--	, 'Lastrun date'
+--	,'2022-01-01 00:00:00'
+--	,'2078-12-31 00:00:00'
+--	,'N')
+
+	INSERT INTO [SHPt_Interface_Adhoc_Param] (
+	InterfaceId
+	,InterfaceRowId
+	,lookupname
+	,lookupvalue
+	,lookupdesc
+	,effstartdate
+	,effenddate
+	,IsAdhoc
+	)
+VALUES (
+	'INT00000240'
+	,3
+	,'NumberPercentage'
+	,'100%'
+	, 'NumberPercentage'
+	,'2022-01-01 00:00:00'
+	,'2078-12-31 00:00:00'
+	,'N')
+			
+INSERT INTO [SHPt_Interface_Adhoc_Param] (
+	InterfaceId
+	,InterfaceRowId
+	,lookupname
+	,lookupvalue
+	,lookupdesc
+	,effstartdate
+	,effenddate
+	,IsAdhoc
+	)
+VALUES (
+	'INT00000240'
+	,4
+	,'AuditType'
+	,'2'
+	, 'AuditType Number,holds only 1 num/blank, not multiple'
+	,'2022-01-01 00:00:00'
+	,'2078-12-31 00:00:00'
+	,'N')
+	INSERT INTO [SHPt_Interface_Adhoc_Param] (
+	InterfaceId
+	,InterfaceRowId
+	,lookupname
+	,lookupvalue
+	,lookupdesc
+	,effstartdate
+	,effenddate
+	,IsAdhoc
+	)
+VALUES (
+	'INT00000240'
+	,5
+	,'ScheduledRunFromDateOverride'
+	,''
+	, 'ClaimDate cutoff for Sch RUn(>Date)'
+	,'2022-01-01 00:00:00'
+	,'2078-12-31 00:00:00'
+	,'N')
+	INSERT INTO [SHPt_Interface_Adhoc_Param] (
+	InterfaceId
+	,InterfaceRowId
+	,lookupname
+	,lookupvalue
+	,lookupdesc
+	,effstartdate
+	,effenddate
+	,IsAdhoc
+	)
+VALUES (
+	'INT00000240'
+	,6
+	,'ScheduledRunToDateOverride'
+	,''
+	, 'ClaimDate cutoff for Sch run(<=Date)'
+	,'2022-01-01 00:00:00'
+	,'2078-12-31 00:00:00'
+	,'N')
+
+
+	INSERT INTO [SHPt_Interface_Adhoc_Param] (
+	InterfaceId
+	,InterfaceRowId
+	,lookupname
+	,lookupvalue
+	,lookupdesc
+	,effstartdate
+	,effenddate
+	,IsAdhoc
+	)
+VALUES (
+	'INT00000240'
+	,7
+	,'Adhocparam'
+	,'Focus'
+	, 'FileType'
+	,'2022-01-01 00:00:00'
+	,'2078-12-31 00:00:00'
+	,'N')
+COMMIT TRANSACTION;
+
+--Update [SHPt_Interface_Adhoc_Param] set lookupvalue='1'where InterfaceId='INT00000240' and lookupname='AuditType'
+--Update [SHPt_Interface_Adhoc_Param] set lookupvalue='Focus' where InterfaceId='INT00000240' and lookupdesc='FileType'
