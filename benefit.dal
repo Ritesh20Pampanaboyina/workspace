@@ -1,0 +1,177 @@
+using System;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
+
+namespace Benefit_Audit_Extract
+{
+    public class DataAccessLayer
+    {
+        private readonly string connectionString;
+
+        public DataAccessLayer()
+        {
+            connectionString = ConfigurationManager.ConnectionStrings["CustomDB"].ConnectionString;
+        }
+
+        public void UpdateAuditData(string auditType, DateTime startDate, DateTime endDate, string recordCount, string percentage)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand("SHPp_Percentage_Benefit_Audit_Adhoc_Update", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        // Add parameters to stored procedure
+                        cmd.Parameters.AddWithValue("@Select_Audit_type", string.IsNullOrEmpty(auditType) ? "DefaultAuditType" : auditType);
+                        cmd.Parameters.AddWithValue("@Begin_date", startDate);
+                        cmd.Parameters.AddWithValue("@End_date", endDate);
+
+                        cmd.Parameters.AddWithValue("@Number_of_Records", string.IsNullOrEmpty(recordCount) ? (object)DBNull.Value : recordCount);
+                        cmd.Parameters.AddWithValue("@Percentage_of_Records", string.IsNullOrEmpty(percentage) ? (object)DBNull.Value : percentage);
+
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                throw new ApplicationException("An error occurred while updating audit data.", ex);
+            }
+        }
+
+        public bool IsXMLFileGenerated(string auditType)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT TOP 1 FilePath FROM AuditHistory WHERE AuditType = @Select_Audit_Type ORDER BY DateGenerated DESC";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Select_Audit_Type", auditType);
+                        conn.Open();
+
+                        object result = cmd.ExecuteScalar();
+                        return result != null && !string.IsNullOrEmpty(result.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("An error occurred while checking for the generated XML file.", ex);
+            }
+        }
+
+        public DataTable GetAuditHistory(string auditType = null, DateTime? startDate = null, DateTime? endDate = null)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT AuditType, DateGenerated, FileName, FilePath FROM AuditHistory " +
+                                   "WHERE (@Select_Audit_Type IS NULL OR AuditType = @Select_Audit_Type) " +
+                                   "AND (@Begin_Date IS NULL OR DateGenerated >= @Begin_Date) " +
+                                   "AND (@End_Date IS NULL OR DateGenerated <= @End_Date) " +
+                                   "ORDER BY DateGenerated DESC";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Select_Audit_Type", string.IsNullOrEmpty(auditType) ? (object)DBNull.Value : auditType);
+                        cmd.Parameters.AddWithValue("@Begin_Date", startDate.HasValue ? (object)startDate.Value : DBNull.Value);
+                        cmd.Parameters.AddWithValue("@End_Date", endDate.HasValue ? (object)endDate.Value : DBNull.Value);
+
+                        DataTable auditHistory = new DataTable();
+                        conn.Open();
+
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                        {
+                            adapter.Fill(auditHistory);
+                        }
+
+                        // Modify FilePath for display as a clickable link
+                        foreach (DataRow row in auditHistory.Rows)
+                        {
+                            if (!string.IsNullOrEmpty(row["FilePath"].ToString()))
+                            {
+                                string filePath = row["FilePath"].ToString();
+                                row["FileName"] = $"<a href='{filePath}' target='_blank'>{row["FileName"]}</a>"; // Create a clickable link
+                            }
+                        }
+
+                        return auditHistory;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("An error occurred while fetching audit history.", ex);
+            }
+        }
+
+        public string GetLatestXMLFilePath(string auditType)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT TOP 1 FilePath FROM AuditHistory WHERE AuditType = @Select_Audit_Type ORDER BY DateGenerated DESC";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Select_Audit_Type", auditType);
+                        conn.Open();
+
+                        object result = cmd.ExecuteScalar();
+
+                        if (result != null)
+                        {
+                            string filePath = result.ToString();
+
+                            // Verify the file path exists and return it
+                            return File.Exists(filePath) ? filePath : null;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("An error occurred while fetching the latest XML file path.", ex);
+            }
+
+            return null;
+        }
+
+        public void SaveAuditRecord(string auditType, DateTime dateGenerated, string fileName, string filePath)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand("SHPp_SaveAuditRecord", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@Select_Audit_Type", auditType);
+                        cmd.Parameters.AddWithValue("@DateGenerated", dateGenerated);
+                        cmd.Parameters.AddWithValue("@FileName", fileName);
+                        cmd.Parameters.AddWithValue("@FilePath", filePath);
+
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("An error occurred while saving the audit record.", ex);
+            }
+        }
+    }
+}
